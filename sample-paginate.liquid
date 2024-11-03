@@ -1,0 +1,48 @@
+
+{% paginate collection.products by 10 %}
+    <ul class="custom_collection_prodct">
+      {% for product in collection.products %}
+        <li>
+          <div></div>
+          <p>{{ product.title }}</p>
+          <p>
+            {% if product.available %}
+              Product is available
+            {% else %}
+              NOT available
+            {% endif %}
+          </p>
+          <p>
+            Price: <i> {{ product.price | money_with_currency }} </i>
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+    <!-- paginate controlls -->
+    {% comment %}
+        <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}">Previous</a>
+        {% endif %}
+  
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}">{{ part.title }} </a>
+          {% else %}
+            <span> {{ part.title }} </span>
+          {% endif %}
+        {% endfor %}
+  
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}"> Next </a>
+        {% endif %}
+      </div>
+    {% endcomment %}
+    <div class="pagination">
+      {{- paginate | default_pagination }}
+    </div>
+  {% endpaginate %}
+
+  {% comment %} 
+  you can use both default pagination technique both will give similar result you have to do css by yourself. 
+  {% endcomment %}
